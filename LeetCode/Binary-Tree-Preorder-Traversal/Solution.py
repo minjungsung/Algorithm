@@ -11,7 +11,6 @@ class Solution:
             return result
 
         def loop(root, res):
-            print(root, res)
             if root:
                 res.append(root.val)
             if root.left:
@@ -19,7 +18,6 @@ class Solution:
             if root.right:
                 loop(root.right, res)
         temp = loop(root, result)
-        print(result)
         return result
         
 
