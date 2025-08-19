@@ -1,30 +1,25 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-class Solution:
-    def minDepth(self, root: Optional[TreeNode]) -> int:
-#if there is no root then there can't be any depth
-        if not root:
-            return 0
-#if the node has no left node and no right node, then it means it is the leaf node.
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
 
-#first of make the double valued queue to keep the track of nodes and heights simultaniously. DEQUE stands for "double-ended queue".
-# set deque with root node and height 1
- 
-        queue = deque([(root, 1)])
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int depth = 1;
 
-# as long as the queue is not empty, we will keep checking
-        while queue:
-            node, depth = queue.popleft()
-#remove the first node and see if it has any child or not, 
-            if not node.left and not node.right:
-                return depth
-#incase of any child,add that child in the queue and move on to increase the depth
-            if node.left:
-                queue.append((node.left, depth + 1))
-            if node.right:
-                queue.append((node.right, depth + 1))
-        return depth
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode node = queue.poll();
+                if (node.left == null && node.right == null)
+                    return depth;
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+
+            depth++;
+        }
+
+        return depth;
+    }
+}
