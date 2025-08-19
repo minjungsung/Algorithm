@@ -5,10 +5,7 @@ class Solution:
         for char in small:
             if char.isalnum():
                 filtered.append(char)
-        print(filtered)
         for index in range(len(filtered)//2):
-            print(index)
-            print(filtered[index], filtered[-index-1])
             if filtered[index] != filtered[-index-1]:
                 return False
             
